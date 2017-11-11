@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/layout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+          
+   <f:metadata>
+        <f:viewAction action="#{ingreso.onload('')}" />
+    </f:metadata>
+    <ui:define name="bodyJR">
+        <h:form id="frmReservar">
+            <p:panel header="Reservacion de Habitacion">
+                <h:panelGrid columns="10" border="0"  cellpadding="5">
+                    <h:outputLabel for="cliente" value="Ingrese su Codigo Cliente" />
+                    <p:inputText id="idCliente" value="#{operReserv.cliente}"  required="true" placeholder="Codigo Cliente" size="10" label="Name"/>
+
+                    <p:commandButton value="Buscar" icon="ui-icon-radio-off" />
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+
+        <h:form>
+           <p:growl id="growl" showDetail="true" sticky="true" />  
+        </h:form>
+        
+    </ui:define>
+</ui:composition>
+

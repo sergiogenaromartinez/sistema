@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/layout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+          
+     <f:metadata>
+        <f:viewAction action="#{ingreso.onload('')}" />
+    </f:metadata>
+    <ui:define name="bodyJR">
+        <h:form id="frmDispo">
+            <p:panel header="Disponibilidad">
+                <h:panelGrid columns="10" border="0"  cellpadding="5">
+
+                    <h:outputLabel for="ubicacion" value="Ubicacion" />
+                    <p:selectOneMenu id="paises"  value="#{operDispo.ubicacion}" required="true" style="width:125px" >
+                        <p:ajax listener="#{operDispo.cargaHoteles}" update="hoteles" />
+                        <f:selectItems value="#{operDispo.lstUbica}" var="paises" itemValue="#{paises.idubicacion}" itemLabel="#{paises.nombreubicacion}"  />
+                    </p:selectOneMenu>
+                    
+                    <h:outputLabel for="nit" value="NIT" />
+                    <p:selectOneMenu id="hoteles"  value="#{operDispo.hotel}" required="true" style="width:125px">
+                        <f:selectItems value="#{operDispo.lstHotel}" var="hotel" itemValue="#{hotel.idhotel}" itemLabel="#{hotel.nombrehotel}"  />
+                    </p:selectOneMenu>
+
+                    <p:commandButton value="Filtrar" action="#{operDispo.cargaDiponible}" ajax="false" icon="ui-icon-disk" validateClient="true" update="frmDispo" />
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+        
+         <h:form>
+             <p:dataTable paginator="true" var="dispo" value="#{operDispo.listaDispo}"  >
+                <p:column headerText="Ubicacion">
+                    <h:outputText value="#{dispo.nombreUbicacin}" />
+                </p:column>
+                <p:column headerText="Hotel">
+                    <h:outputText value="#{dispo.nombreHotel}" />
+                </p:column>
+                <p:column headerText="Habitacion">
+                    <h:outputText value="#{dispo.nombreHabitacion}" />
+                </p:column>
+                <p:column headerText="Tipo">
+                    <h:outputText value="#{dispo.tipoHabitacion}" />
+                </p:column>
+                <p:column headerText="Precio">
+                    <h:outputText value="#{dispo.valor}" />
+                </p:column>
+                <p:column headerText="Estado">
+                    <h:outputText value="#{dispo.estado}" />
+                </p:column>
+                <p:column headerText="Acciones">
+                    <p:commandButton value="Reservar" icon="ui-icon-radio-off" action="#{operDispo.reservarHab(dispo.idHabitacion)}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        
+       
+        <h:form>
+           <p:growl id="growl" showDetail="true" sticky="true" />  
+        </h:form>
+        
+    </ui:define>
+</ui:composition>

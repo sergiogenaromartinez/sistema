@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/layout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+          
+     <f:metadata>
+        <f:viewAction action="#{ingreso.onload('')}" />
+    </f:metadata>
+    <ui:define name="bodyJR">
+        <h:form id="frmUsuario">
+            <p:panel header="Ingreso de Usuario">
+                <h:panelGrid columns="10" border="0"  cellpadding="5">
+                    <h:outputLabel for="usuario" value="Usuario" />
+                    <p:inputText id="usuario" value="#{mantUsr.usuario}" placeholder="Ingrese un Usuario" required="true" label="Name"/>
+
+                    <h:outputLabel for="nombre" value="Nombre Usuario" />
+                    <p:inputText id="nombre" value="#{mantUsr.nombreUsuario}" required="true" placeholder="Ingrese el Nombre Completo" size="50" label="Name"/>
+                    
+                    <h:outputLabel for="clave" value="Clave" />
+                    <p:password id="clave" value="#{mantUsr.clave}" required="true" placeholder="Ingrese una Clave" label="Name"/>
+                
+                    <h:outputLabel for="tipo" value="Tipo Usuario" />
+                    <p:selectOneMenu id="console"  value="#{mantUsr.tipoUsr}" required="true" style="width:125px">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItem itemLabel="LOCAL" itemValue="Empleado" />
+                        <f:selectItem itemLabel="CLIENTE" itemValue="Cliente" />
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                <p:commandButton value="Guardar" action="#{mantUsr.grabaUsr}" ajax="false" icon="ui-icon-check" validateClient="true" update="frmUsuario" />
+            </p:panel>
+        </h:form>
+        
+        <h:form>
+            <p:dataTable paginator="true"  var="Usuarios" value="#{mantUsr.lstUsrs}" >
+                <p:column headerText="Usuario">
+                    <h:outputText value="#{Usuarios.nombreusuario}" />
+                </p:column>
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{Usuarios.nombrecompleto}" />
+                </p:column>
+                <p:column headerText="Tipo">
+                    <h:outputText value="#{Usuarios.tipousuario}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        
+        <h:form>
+           <p:growl id="growl" showDetail="true" sticky="true" />  
+        </h:form>
+        
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/layout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+          
+    <f:metadata>
+        <f:viewAction action="#{ingreso.onload('')}" />
+    </f:metadata>
+    
+    <ui:define name="bodyJR">
+        <h:form id="frmReservar">
+            <p:panel header="Reservacion de Habitacion">
+                <h:panelGrid columns="10" border="0"  cellpadding="5">
+                    <h:outputLabel for="cliente1" value="Cliente" />
+                    <p:inputText id="cliente1" value="#{operReserv.cliente}" required="true" placeholder="Codigo Cliente" size="10" label="Name"/>
+
+                    <p:commandButton value="Buscar" icon="ui-icon-radio-off" action="#{operReserv.buscaCliente()}"  />
+                </h:panelGrid>
+                <h:panelGrid columns="10" border="0"  cellpadding="5">
+                    
+                    <h:outputLabel for="nombrecli" value="Nombre" />
+                    <p:inputText readonly="true" id="nombrecli" value="#{operReserv.nombreCli}" required="true" placeholder="Nombre Cliente" size="50" label="Name"/>
+
+                    <h:outputLabel for="NIT" value="NIT" />
+                    <p:inputText readonly="true" id="nit" value="#{operReserv.numeroNit}" required="true" placeholder="Nombre Cliente" size="10" label="Name"/>
+
+                    <h:outputLabel for="tele1" value="Tel. Casa" />
+                    <p:inputText readonly="true" id="tel1" value="#{operReserv.telefonoCli1}" required="true" placeholder="Nombre Cliente" size="10" label="Name"/>
+
+                    <h:outputLabel for="tele2" value="Tel. Celular" />
+                    <p:inputText readonly="true" id="tel2" value="#{operReserv.telefonoCli2}" required="true" placeholder="Nombre Cliente" size="10" label="Name"/>
+                </h:panelGrid>
+                
+            </p:panel>
+        </h:form>
+
+        <h:form id="frmHotel">
+            <p:panel header="Referencia de Hotel">
+                <h:panelGrid columns="10" border="0"  cellpadding="5">
+                    <h:outputLabel for="ubicacion" value="Ubicacion" />
+                    <p:inputText readonly="true" id="ubicacion" value="#{operReserv.ubicacion}" required="true" placeholder="Codigo Cliente" size="30" label="Name"/>
+
+                    <h:outputLabel for="hotel" value="Hotel" />
+                    <p:inputText readonly="true" id="hotel" value="#{operReserv.hotel}" required="true" placeholder="Nombre Cliente" size="30" label="Name"/>
+
+                    <h:outputLabel for="habitacion" value="Habitacion" />
+                    <p:inputText readonly="true" id="habitacion" value="#{operReserv.habitacion}" required="true" placeholder="Nombre Cliente" size="30" label="Name"/>
+
+                    <h:outputLabel for="precio" value="Precio" />
+                    <p:inputText readonly="true" id="precio" value="#{operReserv.precio}" required="true" placeholder="Nombre Cliente" size="10" label="Name"/>
+
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+        
+
+        <h:form id="frmFechas">
+            <p:panel header="Fecha de Reservacion">
+                <h:panelGrid columns="10" border="0" cellpadding="5">
+                    <h:outputLabel for="fechaini" value="Fecha Inicio" />
+                    <p:calendar id="fechaini" value="#{operReserv.fechaIni}" pattern="dd-MM-yyyy" mask="true" />
+
+                    <h:outputLabel for="fechafin" value="Fecha Final" />
+                    <p:calendar id="fechafin" value="#{operReserv.fechaFin}" pattern="dd-MM-yyyy" mask="true" />
+
+                    <p:commandButton value="Realizar Reserva" icon="ui-icon-radio-off"  />
+
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+
+        
+        <p:panel header="Mis Reservas">
+            <h:form>
+                 <p:dataTable paginator="true" var="reserv" value="#{operReserv.misReservas}"  >
+                    <p:column headerText="Ubicacion">
+                        <h:outputText value="#{reserv.ubicacion}" />
+                    </p:column>
+                    <p:column headerText="Hotel">
+                        <h:outputText value="#{reserv.hotel}" />
+                    </p:column>
+                    <p:column headerText="Habitacion">
+                        <h:outputText value="#{reserv.habitacion}" />
+                    </p:column>
+                    <p:column headerText="Precio">
+                        <h:outputText value="#{reserv.precio}" />
+                    </p:column>
+                    <p:column headerText="Fecha Ini">
+                        <h:outputText value="#{reserv.fechaIni}" />
+                    </p:column>
+                    <p:column headerText="Fecha Fin">
+                        <h:outputText value="#{reserv.fechaFin}" />
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:panel>
+        
+
+        
+        <h:form>
+           <p:growl id="growl" showDetail="true" sticky="true" />  
+        </h:form>
+        
+    </ui:define>
+</ui:composition>

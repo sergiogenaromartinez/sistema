@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <style>
+        body{
+            font-family: monospace;
+            font-size:  0.9em
+        }
+        label{
+          font-style:  italic;
+        }
+        
+        #titulo{
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size:  1.9em;
+            color: #ffffff;
+            cursor:  pointer
+        }
+        
+        .btn {
+            background: #3498db;
+            background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+            background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+            background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+            background-image: -o-linear-gradient(top, #3498db, #2980b9);
+            background-image: linear-gradient(to bottom, #3498db, #2980b9);
+            -webkit-border-radius: 12;
+            -moz-border-radius: 12;
+            border-radius: 12px;
+            font-family: Arial;
+            color: #ffffff;
+            font-size: 19px;
+            padding: 7px 25px 7px 25px;
+            text-decoration: none;
+            margin-left:auto; 
+            margin-right:auto;
+        }
+        
+        .btn:hover {
+            background: #3cb0fd;
+            background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+            background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+            text-decoration: none;
+        }
+
+
+    </style>
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Hotel El Cuyo Feliz</title>
+            </f:facet>
+        </h:head>
+        <h:body>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" size="50" style="border: none" >
+                    <div style=" width: 100%; height: 100%; background-color: #000000">
+                    <table align="left">
+                        
+                        <tr>
+                            <td style=" width: 150px">&nbsp;</td>
+                            <td align="center">
+                        <p:link href="/sistema/default.xhtml">
+                                    <h:outputLabel id="titulo" value="Sistema El Cuyo Feliz" />
+                                </p:link>
+                            </td>
+                        </tr>
+                    </table>
+                        </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="50" style="border: none">
+                    <div>
+                        <center style="font-size: 12px;">
+                        <table>
+                            <tr>
+                                <td style="font-size: 12px;">Derechos Reservados</td>
+                                <td style="font-size: 12px;"><img style="display: block; margin: auto; width: 24px; height: 24px" src="data:image/png;base64,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" alt="Red dot" /></td>
+                                <td style="font-size: 12px;">Desarrollado por Virtual Master </td>
+                            </tr>
+                        </table>
+                        </center>
+                    </div>
+                </p:layoutUnit>
+
+               
+
+                <p:layoutUnit position="center" style="border: none">
+                    <ui:insert name="cuerpo">111</ui:insert>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>

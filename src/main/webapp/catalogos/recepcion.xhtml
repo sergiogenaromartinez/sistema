@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/layout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+          
+     <f:metadata>
+        <f:viewAction action="#{ingreso.onload('')}" />
+    </f:metadata>
+    <ui:define name="bodyJR">
+        <h:form id="frmClientes">
+            <p:panel header="Recepcion de Clientes">
+                <h:panelGrid columns="10" border="0"  cellpadding="5">
+
+                    <h:outputLabel for="nombre" value="Nombre Cliente" />
+                    <p:inputText id="nombre" value="#{mantClientes.nombreCliente}" required="true" placeholder="Ingrese el Nombre Completo" size="50" label="Name"/>
+                    
+                    <h:outputLabel for="nit" value="NIT" />
+                    <p:inputText id="nit" value="#{mantClientes.nit}" required="true" placeholder="Ingrese Numero de NIT" label="NIT"/>
+                
+                    <h:outputLabel for="dpi" value="Numero DPI" />
+                    <p:inputText id="dpi" value="#{mantClientes.dpi}" required="true" placeholder="Ingrese Numero de DPI" label="DPI"/>
+
+
+                    
+                </h:panelGrid>
+                <h:panelGrid columns="10" border="0"  cellpadding="5">
+                    
+                    <h:outputLabel for="telcasa" value="Telefono Casa" />
+                    <p:inputText id="telcasa" value="#{mantClientes.telCasa}" required="true" placeholder="Ingrese Numero de DPI" label="DPI"/>
+
+                    <h:outputLabel for="telcel" value="Telefono Celular" />
+                    <p:inputText id="telcel" value="#{mantClientes.telCel}" required="true" placeholder="Ingrese Numero de DPI" label="DPI"/>
+                </h:panelGrid>
+                <p:commandButton value="Guardar" action="#{mantClientes.grabarCliente()}" ajax="false" icon="ui-icon-disk" validateClient="true" update="frmClientes" />
+            </p:panel>
+        </h:form>
+        
+        <h:form>
+            <p:dataTable paginator="true" var="clientes" value="#{mantClientes.lstClientes}" >
+                <p:column headerText="Usuario">
+                    <h:outputText value="#{clientes.nombrecliente}" />
+                </p:column>
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{clientes.nit}" />
+                </p:column>
+                <p:column headerText="Tipo">
+                    <h:outputText value="#{clientes.dpi}" />
+                </p:column>
+                <p:column headerText="Tel Casa">
+                    <h:outputText value="#{clientes.telcasa}" />
+                </p:column>
+                <p:column headerText="Tel Celular">
+                    <h:outputText value="#{clientes.telcel}" />
+                </p:column>
+                <p:column headerText="Acciones">
+                    <p:commandButton value="Eliminar" icon="ui-icon-radio-off" action="#{mantClientes.eliminaCliente(clientes.idcliente)}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <h:form>
+           <p:growl id="growl" showDetail="true" sticky="true" />  
+        </h:form>
+        
+    </ui:define>
+</ui:composition>
